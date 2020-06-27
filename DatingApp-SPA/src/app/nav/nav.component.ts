@@ -21,4 +21,14 @@ export class NavComponent implements OnInit {
     });
   }
 
+  logedin(){
+    var token=localStorage.getItem("token");
+    return  !!token;
+  }
+
+  logout(){
+    localStorage.removeItem("token");
+    console.log("Logout Success!!");
+  }
+
 }
