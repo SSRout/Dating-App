@@ -32,8 +32,11 @@ For Angular.
   - npm install @auth0/angular-jwt
   - npm install ngx-bootstrap --save
   - npm install bootswatch
+  - npm install @kolkov/ngx-gallery
 
 
 
 **✔️ Happy Coding 👍 😊**
+
+###### Thanks To Neil Cummings
 
