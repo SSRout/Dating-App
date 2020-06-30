@@ -8,8 +8,9 @@ Technology Used.
   - Sql Server 14
 
 For PowerShell Migration.
-  - Add-Migration inintDB
+  - Add-Migration initDB
   - Update-Database
+  
 For CLI Migration.
   - dotnet ef migrations add InitialCreate
   - dotnet ef database update

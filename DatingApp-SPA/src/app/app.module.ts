@@ -1,8 +1,3 @@
-import { MemberListResolver } from './_resolver/member-list.resolver';
-import { UserService } from './_serviceces/user.service';
-import { AuthGuard } from './_guards/auth.guard';
-import { AlertifyService } from './_serviceces/alertify.service';
-import { MemberDetailResolver } from './_resolver/member-detail.resolver';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -20,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_serviceces/error.interceptor';
 import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
@@ -28,6 +24,13 @@ import { appRoutes } from './routes';
 import { AuthService } from './_serviceces/auth.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { MemberListResolver } from './_resolver/member-list.resolver';
+import { MemberEditResolver } from './_resolver/member-edit.resolver';
+import { UserService } from './_serviceces/user.service';
+import { AuthGuard } from './_guards/auth.guard';
+import { AlertifyService } from './_serviceces/alertify.service';
+import { MemberDetailResolver } from './_resolver/member-detail.resolver';
+import { PreventUnsaveChangesGuard } from './_guards/prevent-unsave-changes.guard';
 
 export function tokenGetter(){
    return localStorage.getItem('token');
@@ -44,7 +47,8 @@ export function tokenGetter(){
       ListsComponent,
       MessagesComponent,
       MemberCardComponent,
-      MemberDetailsComponent
+      MemberDetailsComponent,
+      MemberEditComponent
    ],
    imports: [
       BrowserModule,
@@ -69,8 +73,10 @@ export function tokenGetter(){
       ErrorInterceptorProvider,
       MemberDetailResolver,
       MemberListResolver,
+      MemberEditResolver,
       AlertifyService,
       AuthGuard,
+      PreventUnsaveChangesGuard,
       UserService
    ],
    bootstrap: [
