@@ -37,8 +37,9 @@ For Angular.
   - npm install @kolkov/ngx-gallery
   - npm install ng2-file-upload --save
 
-##References used 
-[a link](https://www.udemy.com/share/101Wh2/)
+## References used 
+
+[Reference link](https://www.udemy.com/share/101Wh2/)
 
 ###### Thanks To Neil Cummings
 
