@@ -1,6 +1,8 @@
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FileUploadModule } from 'ng2-file-upload';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,12 +50,14 @@ export function tokenGetter(){
       MessagesComponent,
       MemberCardComponent,
       MemberDetailsComponent,
-      MemberEditComponent
+      MemberEditComponent,
+      PhotoEditorComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
+      FileUploadModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       NgxGalleryModule,

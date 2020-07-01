@@ -26,6 +26,7 @@ For API add below pkage from nuget.
   - System.IdentityModel.Tokens.Jwt
   - Microsoft.AspNetCore.Authentication.JwtBearer
   - AutoMapper.Extensions.Microsoft.DependencyInjection
+  - CloudinaryDotNet 
 
 For Angular.
   - Install bootstrap and font awesome
@@ -34,10 +35,12 @@ For Angular.
   - npm install ngx-bootstrap --save
   - npm install bootswatch
   - npm install @kolkov/ngx-gallery
+  - npm install ng2-file-upload --save
 
-
-
-**✔️ Happy Coding 👍 😊**
+##References used 
+[a link](https://www.udemy.com/share/101Wh2/)
 
 ###### Thanks To Neil Cummings
+
+**✔️ Happy Coding 👍 😊**
 
