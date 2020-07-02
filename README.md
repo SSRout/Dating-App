@@ -1,6 +1,30 @@
 
 # Dating APP
 
+- Add appsettings.json file to API folder with below code snipets
+
+{
+  "AppSettings":{
+    "Token":"abcd ABCD 1234 !@#$%^&*(){}"
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=.;Database=DataingApp.DB;Trusted_Connection=true;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+
+  "CloudinarySettings":{
+    "CloudName":"<Yours Key>",
+    "ApiKey":"<Yours Key>",
+    "ApiSecret":"<Yours Key>"
+  }
+}
+
+
 Technology Used.
   - Dot net Core 2.2
   - Angular 10
