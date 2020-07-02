@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { FileUploadModule } from 'ng2-file-upload';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
@@ -25,6 +25,7 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { appRoutes } from './routes';
 import { AuthService } from './_serviceces/auth.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { MemberListResolver } from './_resolver/member-list.resolver';
 import { MemberEditResolver } from './_resolver/member-edit.resolver';
@@ -57,10 +58,12 @@ export function tokenGetter(){
       BrowserModule,
       HttpClientModule,
       FormsModule,
+      ReactiveFormsModule,
       FileUploadModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       NgxGalleryModule,
+      BsDatepickerModule.forRoot() ,
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot(),
       JwtModule.forRoot({

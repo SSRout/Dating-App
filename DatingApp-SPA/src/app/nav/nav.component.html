@@ -20,7 +20,7 @@
         Welcome {{authservice.decodedToken?.unique_name | titlecase}}
       </a>
       <span class="mr-1">
-        <img src="{{photoUrl}}" alt="">
+        <img src="{{photoUrl || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'}}" alt="">
       </span>
 
       <div class="dropdown-menu mt-3" *dropdownMenu>
