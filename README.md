@@ -2,7 +2,7 @@
 # Dating APP
 
 - Add appsettings.json file to API folder with below code snipets
-
+```
 {
   "AppSettings":{
     "Token":"abcd ABCD 1234 !@#$%^&*(){}"
@@ -23,7 +23,7 @@
     "ApiSecret":"<Yours Key>"
   }
 }
-
+```
 
 Technology Used.
   - Dot net Core 2.2
