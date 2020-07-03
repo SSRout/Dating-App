@@ -8,9 +8,11 @@ import{Resolve, Router, ActivatedRouteSnapshot} from '@angular/router'
 @Injectable()
 
 export class MemberListResolver implements Resolve<User[]>{
+    pageNumber=1;
+    pageSize=5;
     constructor(private userService:UserService,private alertify:AlertifyService,private route:Router){}
     resolve(route:ActivatedRouteSnapshot):Observable<[]>{
-        return this.userService.getUsers().pipe(catchError(
+        return this.userService.getUsers(this.pageNumber,this.pageSize).pipe(catchError(
             err=>{
                 this.alertify.error("Problem Retrieving Data!!");
                 this.route.navigate(['/home']);
