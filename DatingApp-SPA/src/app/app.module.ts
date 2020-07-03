@@ -27,6 +27,7 @@ import { AuthService } from './_serviceces/auth.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { TimeagoModule } from 'ngx-timeago';
 import { MemberListResolver } from './_resolver/member-list.resolver';
 import { MemberEditResolver } from './_resolver/member-edit.resolver';
 import { UserService } from './_serviceces/user.service';
@@ -63,6 +64,7 @@ export function tokenGetter(){
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       NgxGalleryModule,
+      TimeagoModule.forRoot(),
       BsDatepickerModule.forRoot() ,
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot(),

@@ -40,14 +40,14 @@ namespace DatingApp.API.Controllers
             var createdUser = await _repo.Register(userToCreate, userDto.Password);
             var userToReturn=_mapper.Map<UserForDetailsDto>(createdUser);
 
-            return CreatedAtRoute("GetUser",new {controller="USers",id=createdUser.Id},userToReturn);
+            return CreatedAtRoute("GetUser",new {controller="Users",id=createdUser.Id},userToReturn);
 
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto loginDto)
         {
-            var userFromRepo = await _repo.Login(loginDto.Userid.ToLower(), loginDto.Password);
+            var userFromRepo = await _repo.Login(loginDto.UserName.ToLower(), loginDto.Password);
             if (userFromRepo == null)
                 return Unauthorized();
 
@@ -56,9 +56,9 @@ namespace DatingApp.API.Controllers
                 new Claim(ClaimTypes.Name,userFromRepo.UserName)
             };
 
-            var kay = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
 
-            var creds=new SigningCredentials(kay,SecurityAlgorithms.HmacSha256Signature);
+            var creds=new SigningCredentials(key,SecurityAlgorithms.HmacSha256Signature);
              
             var tokenDescriptor=new SecurityTokenDescriptor{
                 Subject=new ClaimsIdentity(claims),

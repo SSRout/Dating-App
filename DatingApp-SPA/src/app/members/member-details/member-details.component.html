@@ -5,7 +5,9 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{user.photoUrl || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'}}" alt="{{user.knownAs}}">
+        <img class="card-img-top img-thumbnail"
+          src="{{user.photoUrl || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'}}"
+          alt="{{user.knownAs}}">
         <div class="card-body">
           <div>
             <strong>Location: </strong>
@@ -17,11 +19,11 @@
           </div>
           <div>
             <strong>Last Active: </strong>
-            <p>{{user.lastActive}}</p>
+            <p>{{user.lastActive|timeago:'false'}}</p>
           </div>
           <div>
             <strong>Since Created: </strong>
-            <p>{{user.created}}</p>
+            <p>{{user.created | date}}</p>
           </div>
         </div>
         <div class="card-footer">
@@ -47,7 +49,7 @@
           </tab>
           <tab heading="Photos">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"
-             style="display:inline-block;margin-bottom: 20px;"></ngx-gallery>
+              style="display:inline-block;margin-bottom: 20px;"></ngx-gallery>
           </tab>
           <tab heading="Messages">
             <p>Messages</p>

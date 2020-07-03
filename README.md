@@ -53,13 +53,14 @@ For API add below pkage from nuget.
   - CloudinaryDotNet 
 
 For Angular.
-  - Install bootstrap and font awesome
+  - npm install bootstrap and font awesome
   - npm install alertifyjs
   - npm install @auth0/angular-jwt
   - npm install ngx-bootstrap --save
   - npm install bootswatch
   - npm install @kolkov/ngx-gallery
   - npm install ng2-file-upload --save
+  - npm install ngx-timeago --save
 
 ## References used 
 
