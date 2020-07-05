@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { Routes } from '@angular/router';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { PreventUnsaveChangesGuard } from './_guards/prevent-unsave-changes.guard';
+import { ListsResolver } from './_resolver/lists.resolver';
 
 export const appRoutes: Routes = [
     {path:"",component:HomeComponent},
@@ -24,7 +25,7 @@ export const appRoutes: Routes = [
             {path:"memeber/edit",component:MemberEditComponent,resolve:{user:MemberEditResolver}
             ,canDeactivate:[PreventUnsaveChangesGuard]},
             {path:"messages",component:MessagesComponent},
-            {path:"lists",component:ListsComponent},
+            {path:"lists",component:ListsComponent,resolve:{users:ListsResolver}},
         ]
     },
     // {path:"members",component:MemberListComponent,canActivate:[AuthGuard]},

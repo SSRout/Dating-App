@@ -1,3 +1,4 @@
+import { ListsResolver } from './_resolver/lists.resolver';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -87,6 +88,7 @@ export function tokenGetter(){
       MemberDetailResolver,
       MemberListResolver,
       MemberEditResolver,
+      ListsResolver,
       AlertifyService,
       AuthGuard,
       PreventUnsaveChangesGuard,

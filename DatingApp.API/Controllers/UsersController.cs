@@ -67,5 +67,28 @@ namespace DatingApp.API.Controllers
             throw new Exception($"Upadting Failed for User : {id}");
         }
 
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(int id,int recipientId){
+            if(id!=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+             return Unauthorized();
+            var like=await _repo.GetLike(id,recipientId);
+            if(like!=null){
+                return BadRequest("Already Liked This User");
+            }
+            if(await _repo.GetUser(recipientId)==null){
+                return NotFound();
+            }
+
+            like=new Models.Like{
+                LikeeId=recipientId,
+                LikerId=id
+            };
+            _repo.Add<Models.Like>(like);
+            if(await _repo.SaveAll())
+                return Ok();
+            return BadRequest("Like Failed");
+
+        }
+
     }
 }
