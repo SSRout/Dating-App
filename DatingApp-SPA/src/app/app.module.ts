@@ -1,3 +1,4 @@
+import { MessagesResolver } from './_resolver/messages.resolver';
 import { ListsResolver } from './_resolver/lists.resolver';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +24,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { appRoutes } from './routes';
 import { AuthService } from './_serviceces/auth.service';
@@ -56,7 +58,8 @@ export function tokenGetter(){
       MemberCardComponent,
       MemberDetailsComponent,
       MemberEditComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
+      MemberMessagesComponent
    ],
    imports: [
       BrowserModule,
@@ -89,6 +92,7 @@ export function tokenGetter(){
       MemberListResolver,
       MemberEditResolver,
       ListsResolver,
+      MessagesResolver,
       AlertifyService,
       AuthGuard,
       PreventUnsaveChangesGuard,
