@@ -111,15 +111,15 @@ namespace DatingApp.API.Data
                         .Include(u=>u.Recipient).ThenInclude(p=>p.Photos).AsQueryable();
             switch(msgParams.MessageContainer){
                 case "Inbox":
-                    messages=messages.Where(u=>u.RecipientId==msgParams.UserId);
+                    messages=messages.Where(u=>u.RecipientId==msgParams.UserId && u.RecipientDeleted==false);
                     break;
 
                 case "Outbox":
-                    messages=messages.Where(u=>u.SenderId==msgParams.UserId);
+                    messages=messages.Where(u=>u.SenderId==msgParams.UserId && u.SenderDeleted==false);
                     break;
 
                 default:
-                    messages=messages.Where(u=>u.RecipientId==msgParams.UserId && u.IsRead==false);
+                    messages=messages.Where(u=>u.RecipientId==msgParams.UserId && u.IsRead==false && u.RecipientDeleted==false);
                     break;
 
             }
@@ -129,8 +129,8 @@ namespace DatingApp.API.Data
 
         public async Task<IEnumerable<Message>> GetMessageThred(int userId,int recipientId){
            var messages=await _context.Messages.Include(u=>u.Sender).ThenInclude(p=>p.Photos)
-                        .Include(u=>u.Recipient).ThenInclude(p=>p.Photos).Where(m=>m.RecipientId==userId && m.SenderId==recipientId
-                         || m.RecipientId==recipientId && m.SenderId==userId).OrderByDescending(m=>m.MessageSent).ToListAsync();
+                        .Include(u=>u.Recipient).ThenInclude(p=>p.Photos).Where(m=>m.RecipientId==userId && m.SenderId==recipientId && m.RecipientDeleted==false
+                         || m.RecipientId==recipientId && m.SenderId==userId && m.SenderDeleted==false).OrderByDescending(m=>m.MessageSent).ToListAsync();
             return messages;
         }
         

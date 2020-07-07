@@ -49,4 +49,15 @@ export class MessagesComponent implements OnInit {
       }
     );
   }
+  deleteMessage(id:number){
+    this.alertify.confirm("Are You Sure Want To Delete This Message",()=>{
+      this.UserService.deleteMessage(id,this.authService.decodedToken.nameid).subscribe(()=>{
+        this.messages.splice(this.messages.findIndex(m=>m.id===id),1);
+        this.alertify.success("Deleted Message Successfully");
+      },error=>{
+        this.alertify.error("Failed To Delete Message");
+      });
+    });
+  }
+
 }

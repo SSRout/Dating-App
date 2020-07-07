@@ -60,7 +60,8 @@ namespace DatingApp.API.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId,MessageForCreationDto msgCreationDto){
-            if(userId!=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            var sender=await _repo.GetUser(userId);
+            if(sender.Id!=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                return Unauthorized();
             msgCreationDto.SenderId=userId;
             var recipient=await _repo.GetUser(msgCreationDto.RecipientId);
@@ -70,13 +71,42 @@ namespace DatingApp.API.Controllers
 
             _repo.Add(message);
 
-            var msgToReturn=_mapper.Map<MessageForCreationDto>(message);
-
             if(await _repo.SaveAll())
+            {
+                var msgToReturn=_mapper.Map<MessageToReturnDto>(message);
                 return CreatedAtRoute("GetMessage",new {id=message.Id},msgToReturn);
-
+            }
             throw new Exception("Message Failed");
             
+        }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> DeleteMessage(int id,int userId){
+            if(userId!=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+               return Unauthorized();
+            var messageFromDb=await _repo.GetMassage(id);
+            if(messageFromDb.SenderId==userId)
+                messageFromDb.SenderDeleted=true;
+            if(messageFromDb.RecipientId==userId)
+                messageFromDb.RecipientDeleted=true;
+            if( messageFromDb.SenderDeleted && messageFromDb.RecipientDeleted)
+                _repo.Delete(messageFromDb);
+            if(await _repo.SaveAll())
+                return NoContent();
+            throw new Exception("Error : Failed To Delete Message");
+        }
+
+        [HttpPost("{id}/read")]
+        public async Task<IActionResult> MarkMessageAsRead(int userId,int id){
+            if(userId!=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+               return Unauthorized();
+            var messageFromDb=await _repo.GetMassage(id);
+            if(messageFromDb.RecipientId!=userId)
+               return Unauthorized();
+            messageFromDb.IsRead=true;
+            messageFromDb.DateRead=DateTime.Now;
+            await _repo.SaveAll();
+            return NoContent();
         }
         
     }

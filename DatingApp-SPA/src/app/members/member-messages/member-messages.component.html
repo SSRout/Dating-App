@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <div *ngIf="messages?.length==0">
-      <p>No messages ye..t</p>
+      <p>No messages yet...Say Hi To Start</p>
     </div>
     <ul class="chat">
       <li *ngFor="let message of messages">
@@ -33,9 +33,9 @@
                 <span *ngIf="!message.isRead" class="text-danger">(Unread)</span>
                 <span *ngIf="message.isRead" class="text-success">(Read {{message.dateRead|timeago:'false'}})</span>
               </small>
-              <strong class="primary-font">{{message.senderKnownAs}}</strong>
+              <strong class="primary-font  float-right">{{message.senderKnownAs}}</strong>
             </div>
-           <p class="primary-font  float-right">{{message.content}}</p>
+            <p class="primary-font  float-right">{{message.content}}</p>
           </div>
         </div>
 
@@ -43,11 +43,12 @@
     </ul>
   </div>
   <div class="card-footer">
-    <form action="">
+    <form #messageForm="ngForm" (ngSubmit)="messageForm.valid && sendMessage()">
       <div class="input-group">
-        <input type="text" class="form-control input-sm" placeholder="Send Private Message">
+        <input type="text" class="form-control input-sm" placeholder="Send Private Message"
+          [(ngModel)]="newMessage.content" name="content" required>
         <div class="input-group-append">
-          <button class="btn btn-primary">Send</button>
+          <button class="btn btn-primary" [disabled]="!messageForm.valid">Send</button>
         </div>
       </div>
     </form>

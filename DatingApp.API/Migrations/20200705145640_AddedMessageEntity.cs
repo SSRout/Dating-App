@@ -21,7 +21,7 @@ namespace DatingApp.API.Migrations
                     DateRead = table.Column<DateTime>(nullable: true),
                     MessageSent = table.Column<DateTime>(nullable: false),
                     SenderDeleted = table.Column<bool>(nullable: false),
-                    RecipientDelted = table.Column<bool>(nullable: false)
+                    RecipientDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
