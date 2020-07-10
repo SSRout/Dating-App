@@ -45,14 +45,14 @@ Some Commands.
   - dotnet ef migrations  remove (Remove Latest Migration)
   
 
-For API add below pkage from nuget.
+For API add below Packages from nuget.
   - Microsoft.IdentityModel.Tokens
   - System.IdentityModel.Tokens.Jwt
   - Microsoft.AspNetCore.Authentication.JwtBearer
   - AutoMapper.Extensions.Microsoft.DependencyInjection
   - CloudinaryDotNet 
 
-For Angular.
+For SPA add below Packages from cli.
   - npm install bootstrap and font awesome
   - npm install alertifyjs
   - npm install @auth0/angular-jwt
@@ -68,5 +68,5 @@ For Angular.
 
 ###### Thanks To Neil Cummings
 
-**✔️ Happy Coding 👍 😊**
+**✔️🍺 Happy Coding 👍😊**
 
