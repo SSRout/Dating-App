@@ -1133,6 +1133,158 @@ cd DatingApp
 # Create feature branch
 git checkout -b feature/your-feature-name
 
+---
+
+## 🐛 Troubleshooting
+
+### Backend Issues
+
+#### Error: "Cannot connect to database"
+
+```
+Solution:
+1. Verify Entity Framework is installed: dotnet ef --version
+2. Run migrations: dotnet ef database update
+3. Check datingapp.db file exists in DatingApp.API folder
+4. Delete datingapp.db and retry migrations to reset
+```
+
+#### Error: "Migrations failed"
+
+```
+Solution:
+1. Delete database file: rm datingapp.db (or delete in Windows Explorer)
+2. Re-run migrations: dotnet ef database update
+3. Check for migration errors: dotnet ef migrations list
+```
+
+#### Error: "JWT token invalid/expired"
+
+```
+Solution:
+1. Check token expiration time in AuthController
+2. Verify token secret in appsettings.json matches Startup.cs
+3. Ensure client sends token in Authorization header
+4. Re-login to get new token
+```
+
+#### Error: "Cloudinary upload fails"
+
+```
+Solution:
+1. Verify Cloudinary credentials in appsettings.json
+2. Check Cloudinary account is active
+3. Verify image file size < 10MB
+4. Check supported formats (jpg, png, gif)
+```
+
+### Frontend Issues
+
+#### Error: "Cannot find module '@angular/...'"
+
+```
+Solution:
+1. Run: npm install
+2. Delete node_modules and package-lock.json
+3. Run: npm install again
+4. Restart ng serve
+```
+
+#### Error: "404 Not found" when calling API
+
+```
+Solution:
+1. Verify backend is running on http://localhost:5000
+2. Check apiUrl in environment.ts
+3. Verify CORS is enabled in Startup.cs
+4. Check browser console for actual error
+```
+
+#### Error: "Unauthorized" on every request
+
+```
+Solution:
+1. Ensure you're logged in first
+2. Check token is stored in localStorage
+3. Verify Authorization header format: "Bearer {token}"
+4. Check token hasn't expired (1 day)
+```
+
+#### Error: "Photo upload fails"
+
+```
+Solution:
+1. Verify file size < 10MB
+2. Check file is image (jpg, png, gif)
+3. Verify Cloudinary credentials
+4. Check browser file upload logs
+```
+
+### Database Issues
+
+#### Error: "Database already exists"
+
+```
+Solution:
+1. Drop existing: dotnet ef database drop --force
+2. Recreate: dotnet ef database update
+```
+
+#### Error: "Foreign key constraint fails"
+
+```
+Solution:
+1. Delete data with constraints: DELETE FROM Likes; DELETE FROM Messages;
+2. Or drop and recreate database
+```
+
+---
+
+## 🔄 Development Workflow
+
+### Using VS Code
+
+1. **Open workspace**: `code .`
+2. **Open integrated terminal**: Ctrl+`
+3. **Run backend**:
+   ```bash
+   cd DatingApp.API
+   dotnet watch run
+   ```
+4. **Open new terminal**: Ctrl+Shift+`
+5. **Run frontend**:
+   ```bash
+   cd DatingApp-SPA
+   npm start
+   ```
+
+### Using Visual Studio 2019
+
+1. **Open solution**: Open `DatingApp.API/DatingApp.API.csproj`
+2. **Build**: Ctrl+Shift+B
+3. **Run**: F5 (launches on http://localhost:5000)
+
+### Using Visual Studio Code with Extensions
+
+Recommended extensions:
+
+- C# (Microsoft)
+- Angular Language Service
+- ESLint
+- Prettier
+- REST Client
+- Thunder Client
+
+### Git Workflow
+
+```bash
+# Clone repository
+git clone <repository-url>
+cd DatingApp
+
+# Create feature branch
+git checkout -b feature/your-feature-name
+
 # Make changes and commit
 git add .
 git commit -m "feat: add your feature"
