@@ -28,10 +28,10 @@ namespace DatingApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(Options=>
+            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllers().AddJsonOptions(Options=>
             {
-                Options.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                Options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
             });
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddCors();
@@ -70,18 +70,17 @@ namespace DatingApp.API
                             }
                         });
                 });
-                //app.UseHsts();
             }
            
              app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+             app.UseRouting();
              app.UseAuthentication();
+             app.UseAuthorization();
              app.UseDefaultFiles();
              app.UseStaticFiles();
-             app.UseMvc(routes=>{
-                 routes.MapSpaFallbackRoute(
-                     name:"spa-fallback",
-                     defaults:new {controller="Fallback",action="Index"}
-                 );
+             app.UseEndpoints(endpoints => {
+                 endpoints.MapControllers();
+                 endpoints.MapFallbackToController("Index", "Fallback");
              });
         }
     }
