@@ -126,7 +126,7 @@ Before setting up the project, ensure you have the following installed:
 
 ### Backend Requirements
 
-- **.NET Core SDK 2.2** - [Download](https://dotnet.microsoft.com/download/dotnet/2.2)
+- **.NET 8**
 - **No database server required** - SQLite is embedded and file-based
 
 ### Frontend Requirements
@@ -139,7 +139,7 @@ Before setting up the project, ensure you have the following installed:
 
 - **Cloudinary Account** - [Sign up free](https://cloudinary.com/) for photo hosting
 - **Git** - For version control
-- **VS Code** or **Visual Studio 2019** - For development
+- **VS Code** or **Visual Studio** - For development
 
 ---
 
