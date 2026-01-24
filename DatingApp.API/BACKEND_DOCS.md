@@ -80,7 +80,7 @@ The project structure is organized as follows:
 
 ### Backend Stack
 
-- **Framework**: ASP.NET Core 2.2
+- **Framework**: .net 8
 - **Database**: SQLite 3 (file-based, embedded, no server required!)
 - **ORM**: Entity Framework Core
 - **Authentication**: JWT (JSON Web Tokens)

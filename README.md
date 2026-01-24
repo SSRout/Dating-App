@@ -29,7 +29,7 @@ The Dating App is a full-stack web application that demonstrates modern developm
 
 - **Backend**: RESTful API with authentication and authorization
 - **Frontend**: Single Page Application with responsive UI
-- **Database**: SQL Server with Entity Framework Core
+- **Database**: SQL lite with Entity Framework Core
 - **Cloud Storage**: Cloudinary for photo uploads
 
 ### Core Features
@@ -346,10 +346,6 @@ Open browser and navigate to: **http://localhost:4200**
 
 ## 🗄 Database Setup
 
-### Database Schema Overview
-
-![Database Schema Diagram](./docs/images/database-schema.png)
-
 _For detailed table structure information, refer to the [Migration Commands](#migration-commands) section below._
 
 ### Migration Commands
@@ -400,23 +396,23 @@ dotnet ef database drop
 
 ## 🔑 Dummy User Credentials
 
-Once the database is seeded, you can login with any of these test accounts. All use the password: **`password`**
+Once the database is seeded, you can login with any of these test accounts. All use the password: **`Password@123`**
 
 **Female Users:**
 
-- Username: **Alia** | Password: **password**
-- Username: **Deepika** | Password: **password**
-- Username: **Reba** | Password: **password**
-- Username: **Anna** | Password: **password**
-- Username: **Ashley** | Password: **password**
+- Username: **Alia**
+- Username: **Deepika**
+- Username: **Reba**
+- Username: **Anna**
+- Username: **Ashley**
 
 **Male Users:**
 
-- Username: **Roy** | Password: **password**
-- Username: **Duke** | Password: **password**
-- Username: **John** | Password: **password**
-- Username: **Larsen** | Password: **password**
-- Username: **Simon** | Password: **password**
+- Username: **Roy**
+- Username: **Duke**
+- Username: **John**
+- Username: **Larsen**
+- Username: **Simon**
 
 All users have complete profile information and photos loaded from `Data/UserSeedData.json`.
 
