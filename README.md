@@ -1010,8 +1010,6 @@ ng build --prod
 ## 📚 References
 
 ### Official Documentation
-
-- [ASP.NET Core 2.2 Docs](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-2.2)
 - [Angular 10 Docs](https://angular.io/docs)
 - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 - [JWT.io](https://jwt.io/)
