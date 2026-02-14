@@ -43,6 +43,25 @@ export class NavComponent implements OnInit {
     return !!localStorage.getItem('user');
   }
 
+  getCurrentUsername(): string {
+    if (this.authservice.decodedToken?.unique_name) {
+      return this.authservice.decodedToken.unique_name;
+    }
+    if (this.authservice.currentUser?.username) {
+      return this.authservice.currentUser.username;
+    }
+    const user = localStorage.getItem('user');
+    if (user) {
+      try {
+        const parsedUser = JSON.parse(user);
+        return parsedUser.username || parsedUser.knownAs || 'User';
+      } catch {
+        return 'User';
+      }
+    }
+    return 'User';
+  }
+
   login() {
     this.authservice.login(this.model).subscribe(
       (next) => {

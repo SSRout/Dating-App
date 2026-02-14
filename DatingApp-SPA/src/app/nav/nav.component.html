@@ -63,7 +63,7 @@
           />
           <div class="user-details">
             <div class="user-display-name">
-              {{ authservice.decodedToken?.unique_name | titlecase }}
+              {{ getCurrentUsername() | titlecase }}
             </div>
             <div class="user-status">Logged In</div>
           </div>
