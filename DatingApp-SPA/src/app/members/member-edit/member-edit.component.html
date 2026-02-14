@@ -1,66 +1,196 @@
-
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-sm-4">
-      <h1>Your Profile</h1>
-    </div>
-   <div class="col-sm-8">
-     <div *ngIf="editForm.dirty" class="alert alert-info">
-       <strong>Information:</strong> You Have Made Changes. Any Unsaved Changes Will Be Lost!
-     </div>
-   </div>
+<div class="edit-profile-container">
+  <!-- Header -->
+  <div class="edit-header">
+    <h1 class="edit-title"><i class="fa fa-edit"></i> Edit Your Profile</h1>
+    <p class="edit-subtitle">
+      Update your information to help others get to know you better
+    </p>
   </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{photoUrl || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'}}" alt="{{user.knownAs}}">
-        <div class="card-body">
-          <div>
-            <strong>Location: </strong>
-            <p>{{user.city}}, {{user.country}}</p>
+
+  <!-- Alert Message -->
+  <div *ngIf="editForm.dirty" class="alert-banner">
+    <div class="alert-content">
+      <i class="fa fa-exclamation-circle"></i>
+      <span
+        ><strong>You have unsaved changes!</strong> Click Save to keep your
+        updates.</span
+      >
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="edit-content">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div class="profile-card">
+          <!-- Profile Photo -->
+          <div class="profile-photo-wrapper">
+            <img
+              class="profile-photo-img"
+              src="{{
+                photoUrl ||
+                  'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'
+              }}"
+              alt="{{ user.knownAs }}"
+            />
           </div>
-          <div>
-            <strong>Age: </strong>
-            <p>{{user.age}}</p>
+
+          <!-- Quick Info -->
+          <div class="profile-quick-info">
+            <div class="info-item">
+              <label class="info-label"><i class="fa fa-user"></i> Name</label>
+              <p class="info-text">{{ user.knownAs }}</p>
+            </div>
+            <div class="info-item">
+              <label class="info-label"
+                ><i class="fa fa-calendar"></i> Age</label
+              >
+              <p class="info-text">{{ user.age }} years</p>
+            </div>
+            <div class="info-item">
+              <label class="info-label"
+                ><i class="fa fa-map-marker"></i> Location</label
+              >
+              <p class="info-text">{{ user.city }}, {{ user.country }}</p>
+            </div>
+            <div class="info-item">
+              <label class="info-label"
+                ><i class="fa fa-clock-o"></i> Last Active</label
+              >
+              <p class="info-text">{{ user.lastActive | timeago: "false" }}</p>
+            </div>
+            <div class="info-item">
+              <label class="info-label"
+                ><i class="fa fa-plus-circle"></i> Joined</label
+              >
+              <p class="info-text">{{ user.created | date: "mediumDate" }}</p>
+            </div>
           </div>
-          <div>
-            <strong>Last Active: </strong>
-            <p>{{user.lastActive|timeago:'false' }}</p>
-          </div>
-          <div>
-            <strong>Since Created: </strong>
-            <p>{{user.created | date:'mediumDate'}}</p>
-          </div>
-        </div>
-        <div class="card-footer">
-            <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save</button>
+
+          <!-- Save Button -->
+          <button
+            [disabled]="!editForm.dirty"
+            form="editForm"
+            class="btn btn-save w-100"
+          >
+            <i class="fa fa-check"></i> Save Changes
+          </button>
         </div>
       </div>
-    </div>
-    <div class="col-sm-8">
-      <div class="tab-panel">
-        <tabset class="member-tabset">
-          <tab heading="Edit Profile">
-            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
-              <h4>Description</h4>
-              <textarea name="introduction" [(ngModel)]="user.introduction" rows="6" class="form-control"></textarea>
-              <h4>Looking For</h4>
-              <textarea name="lookingFor" [(ngModel)]="user.lookingFor" rows="6" class="form-control"></textarea>
-              <h4>Interests</h4>
-              <textarea name="interests" [(ngModel)]="user.interests" rows="6" class="form-control"></textarea>
-              <h4>Location Details: </h4>
-              <div class="form-inline">
-                <label for="city" class="mr-2">City </label>
-                <input type="text" class="form-control mr-2" name="city" [(ngModel)]="user.city">
-                <label for="country" class="mr-2">Country  </label>
-                <input type="text" class="form-control" name="country" [(ngModel)]="user.country">
+
+      <!-- Main Edit Area -->
+      <div class="col-lg-8">
+        <div class="edit-panel">
+          <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
+            <!-- About Section -->
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fa fa-quote-left"></i> About You
+              </h3>
+              <p class="section-desc">
+                Tell others about yourself in a few words
+              </p>
+              <div class="form-group">
+                <label for="introduction" class="form-label"
+                  >Your Description</label
+                >
+                <textarea
+                  id="introduction"
+                  name="introduction"
+                  [(ngModel)]="user.introduction"
+                  rows="5"
+                  class="form-control edit-textarea"
+                  placeholder="Describe yourself, your personality, and what makes you unique..."
+                ></textarea>
               </div>
-            </form>
-          </tab>
-          <tab heading="Edit Photo">
-            <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor>
-          </tab>
-        </tabset>
+            </div>
+
+            <!-- Looking For Section -->
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fa fa-heart"></i> What You're Looking For
+              </h3>
+              <p class="section-desc">
+                Help matches understand what you're seeking
+              </p>
+              <div class="form-group">
+                <label for="lookingFor" class="form-label">Looking For</label>
+                <textarea
+                  id="lookingFor"
+                  name="lookingFor"
+                  [(ngModel)]="user.lookingFor"
+                  rows="5"
+                  class="form-control edit-textarea"
+                  placeholder="What are you looking for in a match?"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Interests Section -->
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fa fa-lightbulb-o"></i> Interests & Hobbies
+              </h3>
+              <p class="section-desc">Share your passions and interests</p>
+              <div class="form-group">
+                <label for="interests" class="form-label">Your Interests</label>
+                <textarea
+                  id="interests"
+                  name="interests"
+                  [(ngModel)]="user.interests"
+                  rows="5"
+                  class="form-control edit-textarea"
+                  placeholder="What are your hobbies and interests?"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Location Section -->
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fa fa-map-marker"></i> Location Details
+              </h3>
+              <p class="section-desc">Update your location information</p>
+              <div class="location-inputs">
+                <div class="form-group">
+                  <label for="city" class="form-label">City</label>
+                  <input
+                    type="text"
+                    id="city"
+                    class="form-control edit-input"
+                    name="city"
+                    [(ngModel)]="user.city"
+                    placeholder="Enter your city"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="country" class="form-label">Country</label>
+                  <input
+                    type="text"
+                    id="country"
+                    class="form-control edit-input"
+                    name="country"
+                    [(ngModel)]="user.country"
+                    placeholder="Enter your country"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Photo Section -->
+          <div class="photo-section">
+            <h3 class="section-title">
+              <i class="fa fa-images"></i> Manage Photos
+            </h3>
+            <p class="section-desc">Upload and organize your profile photos</p>
+            <app-photo-editor
+              [photos]="user.photos"
+              (getMemberPhotoChange)="updateMainPhoto($event)"
+            ></app-photo-editor>
+          </div>
+        </div>
       </div>
     </div>
   </div>

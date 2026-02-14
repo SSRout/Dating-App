@@ -1,41 +1,122 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand" [routerLink]="!logedin()?['/home']:['/members']">Dating App</a>
+<nav class="navbar navbar-expand-md navbar-dark modern-navbar">
+  <div class="container-fluid">
+    <a
+      class="navbar-brand brand-logo"
+      [routerLink]="!logedin() ? ['/home'] : ['/members']"
+    >
+      <i class="fa fa-heart"></i> LoveMatch
+    </a>
 
-    <ul  *ngIf="logedin()" class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/members']" >Matches</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link"[routerLink]="['/lists']">Lists</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/messages']">Messages</a>
-      </li>
-    </ul>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul *ngIf="logedin() || hasLocalUser()" class="navbar-nav ms-auto me-3">
+        <li class="nav-item">
+          <a
+            class="nav-link nav-pill"
+            routerLinkActive="active"
+            [routerLink]="['/members']"
+          >
+            <i class="fa fa-fire"></i> Matches
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-pill"
+            routerLinkActive="active"
+            [routerLink]="['/lists']"
+          >
+            <i class="fa fa-star"></i> Likes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-pill"
+            routerLinkActive="active"
+            [routerLink]="['/messages']"
+          >
+            <i class="fa fa-comments"></i> Messages
+          </a>
+        </li>
+      </ul>
 
-    <div *ngIf="logedin()" class="dropdown" dropdown> 
-      <a class="dropdown-toggle text-light mr-3" dropdownToggle>
-        Welcome {{authservice.decodedToken?.unique_name | titlecase}}
-      </a>
-      <span class="mr-1">
-        <img src="{{photoUrl || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'}}" alt="">
-      </span>
+      <!-- User Profile & Dropdown -->
+      <div *ngIf="logedin() || hasLocalUser()" class="dropdown user-dropdown">
+        <div class="user-profile-section" dropdownToggle>
+          <img
+            class="profile-avatar"
+            src="{{
+              photoUrl ||
+                'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'
+            }}"
+            alt="Profile"
+          />
+          <div class="user-details">
+            <div class="user-display-name">
+              {{ authservice.decodedToken?.unique_name | titlecase }}
+            </div>
+            <div class="user-status">Logged In</div>
+          </div>
+          <i class="fa fa-chevron-down dropdown-icon"></i>
+        </div>
 
-      <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item"[routerLink]="['/memeber/edit']"><i class="fa fa-user"> Edit Profile</i></a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+        <div class="dropdown-menu dropdown-menu-end user-menu" *dropdownMenu>
+          <a
+            class="dropdown-item menu-item profile-link"
+            [routerLink]="['/memeber/edit']"
+          >
+            <i class="fa fa-user-circle"></i> My Profile
+          </a>
+          <a class="dropdown-item menu-item settings-link" href="#">
+            <i class="fa fa-cog"></i> Settings
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item menu-item logout-item" (click)="logout()">
+            <i class="fa fa-sign-out"></i> Logout
+          </a>
+        </div>
       </div>
-    </div>
 
-    <form *ngIf="!logedin()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)=login()>
-      <input class="form-control mr-sm-2" type="text" name="username" placeholder="User ID" required
-        [(ngModel)]="model.username">
-      <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" required
-        [(ngModel)]="model.password">
-      <button [disabled]="!loginForm.valid" class="btn btn-info my-2 my-sm-0" type="submit">Signin</button>
-    </form>
+      <form
+        *ngIf="!logedin()"
+        #loginForm="ngForm"
+        class="form-inline login-form"
+        (ngSubmit)="login()"
+      >
+        <input
+          class="form-control login-input"
+          type="text"
+          name="username"
+          placeholder="Email or Username"
+          required
+          [(ngModel)]="model.username"
+        />
+        <input
+          class="form-control login-input"
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          [(ngModel)]="model.password"
+        />
+        <button
+          [disabled]="!loginForm.valid"
+          class="btn btn-primary login-btn"
+          type="submit"
+        >
+          Sign In
+        </button>
+      </form>
+    </div>
   </div>
 </nav>

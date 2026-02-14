@@ -1,0 +1,250 @@
+.likes-container {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+/* Header */
+.likes-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.header-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.header-title i {
+  color: #ff6b5b;
+  font-size: 2.8rem;
+}
+
+.header-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Filter Tabs */
+.likes-filters {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 15px;
+  background: white;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.filter-tab {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.filter-tab:hover {
+  background: rgba(255, 107, 91, 0.1);
+  color: #ff6b5b;
+}
+
+.filter-tab.active {
+  background: linear-gradient(135deg, #ff6b5b 0%, #ff5a7e 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 91, 0.3);
+}
+
+.filter-tab i {
+  font-size: 16px;
+}
+
+/* Grid */
+.likes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.grid-item {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.empty-icon {
+  font-size: 64px;
+  color: #ff6b5b;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  color: #999;
+  margin: 0;
+}
+
+/* Pagination */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+::ng-deep .pagination {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+::ng-deep .pagination li {
+  list-style: none;
+}
+
+::ng-deep .pagination li a,
+::ng-deep .pagination li span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #666;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+::ng-deep .pagination li a:hover {
+  border-color: #ff6b5b;
+  color: #ff6b5b;
+  background: rgba(255, 107, 91, 0.05);
+}
+
+::ng-deep .pagination li.active a,
+::ng-deep .pagination li.active span {
+  background: linear-gradient(135deg, #ff6b5b 0%, #ff5a7e 100%);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 91, 0.3);
+}
+
+::ng-deep .pagination li i {
+  font-size: 14px;
+}
+
+::ng-deep .pagination li:disabled a,
+::ng-deep .pagination li:disabled span {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .likes-container {
+    padding: 20px 15px;
+  }
+
+  .likes-header {
+    margin-bottom: 30px;
+  }
+
+  .header-title {
+    font-size: 2rem;
+  }
+
+  .filter-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter-tab {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .likes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .filter-tab {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .filter-tab span {
+    display: none;
+  }
+
+  .likes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  ::ng-deep .pagination li a,
+  ::ng-deep .pagination li span {
+    min-width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+}

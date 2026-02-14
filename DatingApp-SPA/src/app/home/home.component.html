@@ -1,18 +1,73 @@
-<div class="container mt-5">
-  <div *ngIf="!registerMode" style="text-align: center">
-    <h1>Find your match</h1>
-    <p class="lead">Come on in to view your matches... All you need to do is sign up!</p>
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
-      <button class="btn btn-info btn-lg">Learn more</button>
+<div *ngIf="!registerMode" class="hero-section">
+  <div class="hero-content">
+    <div class="hero-text-wrapper">
+      <h1 class="hero-title">Find Your Perfect Match</h1>
+      <p class="hero-subtitle">
+        Meet amazing people, make meaningful connections, and start your love
+        story.
+      </p>
+      <div class="hero-features">
+        <div class="feature-item">
+          <i class="fa fa-heart"></i>
+          <span>Real Connections</span>
+        </div>
+        <div class="feature-item">
+          <i class="fa fa-lock"></i>
+          <span>Safe & Secure</span>
+        </div>
+        <div class="feature-item">
+          <i class="fa fa-smile-o"></i>
+          <span>Fun & Easy</span>
+        </div>
+      </div>
+      <div class="cta-buttons">
+        <button
+          class="btn btn-primary btn-lg btn-register"
+          (click)="registerToggle()"
+        >
+          <i class="fa fa-user-plus"></i> Start Matching
+        </button>
+        <button class="btn btn-outline-secondary btn-lg btn-learn">
+          <i class="fa fa-info-circle"></i> Learn More
+        </button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="floating-card card-1">
+        <div class="card-avatar">👩</div>
+        <div class="card-info">
+          <p><strong>Sarah, 24</strong></p>
+          <p class="location"><i class="fa fa-map-marker"></i> New York</p>
+        </div>
+      </div>
+      <div class="floating-card card-2">
+        <div class="card-avatar">👨</div>
+        <div class="card-info">
+          <p><strong>John, 26</strong></p>
+          <p class="location"><i class="fa fa-map-marker"></i> Los Angeles</p>
+        </div>
+      </div>
+      <div class="floating-card card-3">
+        <div class="card-avatar">❤️</div>
+        <div class="card-info">
+          <p><strong>Perfect Match!</strong></p>
+          <p class="location">Connection Made</p>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <div  *ngIf="registerMode" class="container">
-    <div class="row justify-content-center">
-      <div class="col-4">
-          <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
-      </div>
+<div *ngIf="registerMode" class="register-section">
+  <div class="register-wrapper">
+    <div class="register-header">
+      <h2>Join the Community</h2>
+      <p>Create your account and start exploring</p>
+    </div>
+    <div class="register-container">
+      <app-register
+        (cancelRegister)="cancelRegisterMode($event)"
+      ></app-register>
     </div>
   </div>
 </div>

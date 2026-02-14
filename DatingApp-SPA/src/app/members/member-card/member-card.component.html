@@ -1,20 +1,61 @@
-<div class="card mb-4">
-  <div class="card-img-wrapper">
-    <img src="{{user.photoUrl || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'}}" alt="{{user.knownAs}}" class="card-img-top">
-    <ul class="list-inline members-icon animate text-center">
-      <li class="list-inline-item">
-        <button class="btn btn-primary" [routerLink]="['/members/',user.id]"><i class="fa fa-user"></i></button>
-      </li>
-      <li class="list-inline-item">
-        <button class="btn btn-primary" (click)="sendLike(user.id)"><i class="fa fa-heart"></i></button>
-      </li>
-      <li class="list-inline-item">
-        <button class="btn btn-primary" [routerLink]="['/members/',user.id]" [queryParams]="{tab:3}"><i class="fa fa-envelope"></i></button>
-      </li>
-    </ul>
+<div class="modern-card">
+  <div class="card-image-container">
+    <img
+      src="{{
+        user.photoUrl ||
+          'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'
+      }}"
+      alt="{{ user.knownAs }}"
+      class="card-image"
+    />
+
+    <div class="card-overlay">
+      <div class="user-info-overlay">
+        <h3 class="user-name">{{ user.knownAs }}, {{ user.age }}</h3>
+        <p class="user-location">
+          <i class="fa fa-map-marker"></i> {{ user.city }}
+        </p>
+      </div>
+
+      <div class="action-buttons">
+        <button
+          class="btn-action btn-view"
+          [routerLink]="['/members/', user.id]"
+          title="View Profile"
+        >
+          <i class="fa fa-user"></i>
+        </button>
+        <button
+          class="btn-action btn-like"
+          (click)="sendLike(user.id)"
+          title="Like"
+        >
+          <i class="fa fa-heart"></i>
+        </button>
+        <button
+          class="btn-action btn-message"
+          [routerLink]="['/members/', user.id]"
+          [queryParams]="{ tab: 3 }"
+          title="Message"
+        >
+          <i class="fa fa-envelope"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="online-indicator" *ngIf="user.lastActive">
+      <span class="last-active">{{ user.lastActive | timeago: "false" }}</span>
+    </div>
   </div>
-  <div class="card-body p-1">
-    <h6 class="card-title text-center mb-1"><i class="fa fa-user"></i> {{user.knownAs}},{{user.age}}</h6>
-    <p class="card-text text-muted text-center">{{user.city}}</p>
+
+  <div class="card-footer-info">
+    <p class="user-bio" *ngIf="user.introduction">
+      {{ user.introduction | slice: 0 : 50 }}...
+    </p>
+    <div class="card-tags">
+      <span class="tag" *ngIf="user.city"
+        ><i class="fa fa-map-marker"></i>{{ user.city }}</span
+      >
+    </div>
   </div>
 </div>

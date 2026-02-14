@@ -1,53 +1,314 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/bootswatch/dist/United/bootstrap.min.css';
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
-@import '../node_modules//alertifyjs/build/css/alertify.min.css';
-@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
-@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import "../node_modules/alertifyjs/build/css/alertify.min.css";
+@import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
+@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css";
 
+/* Modern Color Scheme */
+:root {
+  --primary-gradient: linear-gradient(135deg, #ff6b5b 0%, #ff5a7e 100%);
+  --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --light-bg: #f8f9fa;
+  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+  --border-radius-sm: 8px;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff6b5b 0%, #f5576c 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff5a7e 0%, #f5576c 100%);
+}
+
+/* Tab Panel Styling */
 .tab-panel {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 4px;
+  background: white;
+  border: none;
+  padding: 20px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--card-shadow);
+}
+
+.nav-tabs {
+  border: none;
+  background: white;
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.nav-tabs > li.open,
+.member-tabset > .nav-tabs > li:hover {
+  border-bottom: 3px solid transparent;
+}
+
+.member-tabset > .nav-tabs > li.open > a,
+.member-tabset > .nav-tabs > li:hover > a,
+.nav-tabs > li > a:hover {
+  border: none;
+  background: rgba(255, 107, 91, 0.1);
+  color: #ff6b5b;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+}
+
+.member-tabset > .nav-tabs > li.open > a > i,
+.member-tabset > .nav-tabs > li:hover > a > i {
+  color: #ff6b5b;
+}
+
+.member-tabset > .nav-tabs > li.active {
+  border-bottom: 3px solid #ff6b5b;
+  position: relative;
+}
+
+.member-tabset > .nav-tabs > li.active > a {
+  border: none;
+  color: #ff6b5b;
+  background: rgba(255, 107, 91, 0.05);
+  font-weight: 600;
+}
+
+.member-tabset > .nav-tabs > li.active > a > i {
+  color: #ff6b5b;
+}
+
+.member-tabset > .tab-content {
+  margin-top: 0;
+  background-color: white;
+  border: none;
+  border-top: none;
+  padding: 20px 15px;
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+  box-shadow: var(--card-shadow);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 10px 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(255, 107, 91, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ff5a7e 0%, #ff4a6c 100%);
+  box-shadow: 0 8px 25px rgba(255, 107, 91, 0.4);
+  transform: translateY(-2px);
+  color: white;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 10px 24px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #0f8870 0%, #2dd86f 100%);
+  box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+  transform: translateY(-2px);
+  color: white;
+}
+
+.btn-info {
+  background: var(--secondary-gradient);
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 10px 24px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-info:hover {
+  background: linear-gradient(135deg, #5568d3 0%, #6a3696 100%);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px);
+  color: white;
+}
+
+/* Input Styles */
+.form-control {
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius-md);
+  padding: 10px 15px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #ff6b5b;
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 91, 0.25);
+  background-color: white;
+}
+
+.form-control:hover {
+  border-color: #ff6b5b;
+}
+
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  padding-right: 35px;
+}
+
+/* Badge Styles */
+.badge {
+  padding: 8px 12px;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.badge-primary {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.badge-success {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+}
+
+/* Card Transitions */
+.card {
+  border: none;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--card-hover-shadow);
+  transform: translateY(-5px);
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.card-title {
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+p {
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Container Padding */
+.container {
+  padding: 20px;
+}
+
+/* Utility Classes */
+.text-gradient {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shadow-gradient {
+  box-shadow: var(--card-shadow);
+}
+
+.rounded-xl {
+  border-radius: var(--border-radius-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
   }
-  
-  .nav-tabs > li.open, .member-tabset > .nav-tabs > li:hover {
-    border-bottom: 4px solid #fbcdcf;
+
+  h1 {
+    font-size: 1.75rem;
   }
-  
-  .member-tabset > .nav-tabs > li.open > a, .member-tabset > .nav-tabs > li:hover > a {
-    border: 0;
-    background: none !important;
-    color: #333333;
+
+  h2 {
+    font-size: 1.5rem;
   }
-  
-  .member-tabset > .nav-tabs > li.open > a > i, .member-tabset > .nav-tabs > li:hover > a > i {
-    color: #a6a6a6;
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
   }
-  
-  .member-tabset > .nav-tabs > li.open .dropdown-menu, .member-tabset > .nav-tabs > li:hover .dropdown-menu {
-    margin-top: 0px;
-  }
-  
-  .member-tabset > .nav-tabs > li.active {
-    border-bottom: 4px solid #E95420;
-    position: relative;
-  }
-  
-  .member-tabset > .nav-tabs > li.active > a {
-    border: 0 !important;
-    color: #333333;
-  }
-  
-  .member-tabset > .nav-tabs > li.active > a > i {
-    color: #404040;
-  }
-  
-  .member-tabset > .tab-content {
-    margin-top: -3px;
-    background-color: #fff;
-    border: 0;
-    border-top: 1px solid #eee;
-    padding: 15px 0;
-  }
+}
