@@ -1,6 +1,6 @@
 /* Hero Section */
 .hero-section {
-  min-height: 100vh;
+  min-height: auto;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   display: flex;
   align-items: center;
@@ -240,7 +240,7 @@
 
 /* Register Section */
 .register-section {
-  min-height: 100vh;
+  min-height: auto;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   display: flex;
   align-items: center;

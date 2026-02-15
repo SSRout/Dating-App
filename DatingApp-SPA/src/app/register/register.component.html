@@ -83,9 +83,7 @@
       class="form-control modern-input"
       placeholder="Select your date of birth"
       formControlName="Dob"
-      type="text"
-      bsDatepicker
-      [bsConfig]="bsConfig"
+      type="date"
       [ngClass]="{
         'is-invalid':
           registerForm.get('Dob').errors && registerForm.get('Dob').touched,

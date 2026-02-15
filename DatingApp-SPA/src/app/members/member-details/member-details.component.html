@@ -83,9 +83,57 @@
       <!-- Main Content Area -->
       <div class="col-lg-8">
         <div class="tab-panel">
-          <tabset class="member-tabset" #memberTabs>
+          <!-- Bootstrap Tabs -->
+          <ul class="nav nav-tabs member-tabset" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                [ngClass]="{ active: activeTab === 0 }"
+                (click)="selectTab(0)"
+                type="button"
+              >
+                <i class="fa fa-quote-left"></i> About
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                [ngClass]="{ active: activeTab === 1 }"
+                (click)="selectTab(1)"
+                type="button"
+              >
+                <i class="fa fa-lightbulb-o"></i> Interests
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                [ngClass]="{ active: activeTab === 2 }"
+                (click)="selectTab(2)"
+                type="button"
+              >
+                <i class="fa fa-photo"></i> Photos
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                [ngClass]="{ active: activeTab === 3 }"
+                (click)="selectTab(3)"
+                type="button"
+              >
+                <i class="fa fa-envelope"></i> Messages
+              </button>
+            </li>
+          </ul>
+
+          <!-- Tab Content -->
+          <div class="tab-content">
             <!-- About Tab -->
-            <tab heading="About">
+            <div
+              class="tab-pane fade"
+              [ngClass]="{ 'show active': activeTab === 0 }"
+            >
               <div class="tab-content-modern">
                 <div *ngIf="user.introduction" class="content-section">
                   <h3 class="section-title">
@@ -108,10 +156,13 @@
                   <p>No information provided yet</p>
                 </div>
               </div>
-            </tab>
+            </div>
 
             <!-- Interests Tab -->
-            <tab heading="Interests">
+            <div
+              class="tab-pane fade"
+              [ngClass]="{ 'show active': activeTab === 1 }"
+            >
               <div class="tab-content-modern">
                 <div *ngIf="user.interests" class="content-section">
                   <h3 class="section-title">
@@ -124,28 +175,34 @@
                   <p>No interests listed yet</p>
                 </div>
               </div>
-            </tab>
+            </div>
 
             <!-- Photos Tab -->
-            <tab heading="Photos">
+            <div
+              class="tab-pane fade"
+              [ngClass]="{ 'show active': activeTab === 2 }"
+            >
               <div class="tab-content-modern photos-section">
-                <ngx-gallery
-                  [options]="galleryOptions"
-                  [images]="galleryImages"
-                  class="ngx-gallery"
-                ></ngx-gallery>
+                <div class="photos-grid">
+                  <div *ngFor="let photo of user.photos" class="photo-card">
+                    <img [src]="photo.url" alt="Photo" class="photo" />
+                  </div>
+                </div>
               </div>
-            </tab>
+            </div>
 
             <!-- Messages Tab -->
-            <tab heading="Messages">
+            <div
+              class="tab-pane fade"
+              [ngClass]="{ 'show active': activeTab === 3 }"
+            >
               <div class="tab-content-modern">
                 <app-member-messages
                   [recipientId]="user.id"
                 ></app-member-messages>
               </div>
-            </tab>
-          </tabset>
+            </div>
+          </div>
         </div>
       </div>
     </div>

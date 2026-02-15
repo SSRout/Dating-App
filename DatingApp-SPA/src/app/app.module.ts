@@ -7,8 +7,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -27,11 +25,6 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { appRoutes } from './routes';
 import { AuthService } from './_serviceces/auth.service';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { NgxGalleryModule } from '@kolkov/ngx-gallery';
-import { TimeagoModule } from 'ngx-timeago';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { MemberListResolver } from './_resolver/member-list.resolver';
 import { MemberEditResolver } from './_resolver/member-edit.resolver';
 import { UserService } from './_serviceces/user.service';
@@ -39,6 +32,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AlertifyService } from './_serviceces/alertify.service';
 import { MemberDetailResolver } from './_resolver/member-detail.resolver';
 import { PreventUnsaveChangesGuard } from './_guards/prevent-unsave-changes.guard';
+import { TimeAgoPipe } from './_helpers/time-ago.pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -59,6 +53,7 @@ export function tokenGetter() {
     MemberEditComponent,
     PhotoEditorComponent,
     MemberMessagesComponent,
+    TimeAgoPipe,
   ],
   imports: [
     BrowserModule,
@@ -66,14 +61,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot(),
-    NgxGalleryModule,
-    TimeagoModule.forRoot(),
-    PaginationModule.forRoot(),
-    ButtonsModule.forRoot(),
-    BsDatepickerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    TabsModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

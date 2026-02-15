@@ -14,7 +14,6 @@ app-nav {
 
 router-outlet {
   display: block;
-  min-height: calc(100vh - 80px);
   margin-top: 0;
 }
 

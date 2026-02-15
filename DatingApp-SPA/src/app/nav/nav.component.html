@@ -1,33 +1,40 @@
 <nav class="navbar navbar-expand-md navbar-dark modern-navbar">
-  <div class="container-fluid">
+  <div class="container-fluid nav-container">
+    <!-- Brand Logo -->
     <a
       class="navbar-brand brand-logo"
-      [routerLink]="!logedin() ? ['/home'] : ['/members']"
+      [routerLink]="!isLoggedIn() ? ['/home'] : ['/members']"
+      (click)="closeNavbar()"
     >
       <i class="fa fa-heart"></i> LoveMatch
     </a>
 
+    <!-- Navbar Toggler for Mobile -->
     <button
       class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
+      (click)="toggleNavbar()"
+      [attr.aria-expanded]="!isNavbarCollapsed"
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul *ngIf="logedin() || hasLocalUser()" class="navbar-nav ms-auto me-3">
+    <!-- Navbar Content -->
+    <div
+      class="collapse navbar-collapse"
+      [ngClass]="{ show: !isNavbarCollapsed }"
+    >
+      <!-- Authenticated Navigation Links -->
+      <ul *ngIf="isLoggedIn()" class="navbar-nav ms-auto me-3 nav-links">
         <li class="nav-item">
           <a
             class="nav-link nav-pill"
             routerLinkActive="active"
             [routerLink]="['/members']"
+            (click)="closeNavbar()"
           >
-            <i class="fa fa-fire"></i> Matches
+            <i class="fa fa-fire"></i> Explore
           </a>
         </li>
         <li class="nav-item">
@@ -35,8 +42,9 @@
             class="nav-link nav-pill"
             routerLinkActive="active"
             [routerLink]="['/lists']"
+            (click)="closeNavbar()"
           >
-            <i class="fa fa-star"></i> Likes
+            <i class="fa fa-heart"></i> Likes
           </a>
         </li>
         <li class="nav-item">
@@ -44,62 +52,96 @@
             class="nav-link nav-pill"
             routerLinkActive="active"
             [routerLink]="['/messages']"
+            (click)="closeNavbar()"
           >
             <i class="fa fa-comments"></i> Messages
           </a>
         </li>
       </ul>
 
-      <!-- User Profile & Dropdown -->
-      <div *ngIf="logedin() || hasLocalUser()" class="dropdown user-dropdown">
-        <div class="user-profile-section" dropdownToggle>
+      <!-- User Profile Dropdown (Logged In) -->
+      <div *ngIf="isLoggedIn()" class="dropdown user-dropdown ms-auto">
+        <div
+          class="user-profile-section"
+          (click)="toggleDropdown()"
+          role="button"
+          tabindex="0"
+          [attr.aria-expanded]="isDropdownOpen"
+        >
           <img
             class="profile-avatar"
-            src="{{
+            [src]="
               photoUrl ||
-                'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'
-            }}"
-            alt="Profile"
+              'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-user-image-179582665.jpg'
+            "
+            alt="Profile Avatar"
+            loading="lazy"
           />
           <div class="user-details">
             <div class="user-display-name">
               {{ getCurrentUsername() | titlecase }}
             </div>
-            <div class="user-status">Logged In</div>
+            <div class="user-status">
+              <span class="status-dot"></span> Online
+            </div>
           </div>
           <i class="fa fa-chevron-down dropdown-icon"></i>
         </div>
 
-        <div class="dropdown-menu dropdown-menu-end user-menu" *dropdownMenu>
+        <!-- Dropdown Menu -->
+        <div
+          class="dropdown-menu dropdown-menu-end user-menu"
+          [ngClass]="{ show: isDropdownOpen }"
+        >
+          <h6 class="dropdown-header"><i class="fa fa-user"></i> My Account</h6>
           <a
             class="dropdown-item menu-item profile-link"
             [routerLink]="['/memeber/edit']"
+            (click)="closeDropdown(); closeNavbar()"
           >
-            <i class="fa fa-user-circle"></i> My Profile
+            <i class="fa fa-user-circle"></i> Edit Profile
           </a>
-          <a class="dropdown-item menu-item settings-link" href="#">
+          <a
+            class="dropdown-item menu-item"
+            href="#"
+            (click)="$event.preventDefault(); closeDropdown(); closeNavbar()"
+          >
             <i class="fa fa-cog"></i> Settings
           </a>
+          <a
+            class="dropdown-item menu-item"
+            href="#"
+            (click)="$event.preventDefault(); closeDropdown(); closeNavbar()"
+          >
+            <i class="fa fa-bell"></i> Notifications
+          </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item menu-item logout-item" (click)="logout()">
-            <i class="fa fa-sign-out"></i> Logout
+          <a
+            class="dropdown-item menu-item logout-item"
+            (click)="closeDropdown(); logout()"
+            role="button"
+            tabindex="0"
+          >
+            <i class="fa fa-sign-out"></i> Sign Out
           </a>
         </div>
       </div>
 
+      <!-- Login Form (Not Logged In) -->
       <form
-        *ngIf="!logedin()"
+        *ngIf="!isLoggedIn()"
         #loginForm="ngForm"
-        class="form-inline login-form"
+        class="form-inline login-form ms-auto"
         (ngSubmit)="login()"
       >
         <input
           class="form-control login-input"
           type="text"
           name="username"
-          placeholder="Email or Username"
+          placeholder="Username"
           required
           [(ngModel)]="model.username"
+          aria-label="Username"
         />
         <input
           class="form-control login-input"
@@ -108,11 +150,13 @@
           placeholder="Password"
           required
           [(ngModel)]="model.password"
+          aria-label="Password"
         />
         <button
           [disabled]="!loginForm.valid"
           class="btn btn-primary login-btn"
           type="submit"
+          title="Sign In"
         >
           Sign In
         </button>
