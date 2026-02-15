@@ -1,9 +1,370 @@
-table{
-    margin-top: 15px;
+.messages-container {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: auto;
+  padding: 30px 20px;
 }
-.img-circle{
-    max-height: 50px;
+
+/* Header */
+.messages-header {
+  margin-bottom: 25px;
+  text-align: center;
 }
-td{
-    vertical-align:middle;
+
+.header-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.header-title i {
+  color: #ff6b5b;
+  font-size: 2.8rem;
+}
+
+.header-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Filter Tabs */
+.message-filters {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 15px;
+  background: white;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.filter-tab {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.filter-tab:hover {
+  background: rgba(255, 107, 91, 0.1);
+  color: #ff6b5b;
+}
+
+.filter-tab.active {
+  background: linear-gradient(135deg, #ff6b5b 0%, #ff5a7e 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 91, 0.3);
+}
+
+.filter-tab i {
+  font-size: 16px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.empty-icon {
+  font-size: 64px;
+  color: #ff6b5b;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  color: #999;
+  margin: 0;
+}
+
+/* Messages List */
+.messages-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.message-card {
+  background: white;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+.message-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateX(4px);
+  border-left-color: #ff6b5b;
+}
+
+/* Message Avatar */
+.message-avatar {
+  flex: 0 0 48px;
+  height: 48px;
+}
+
+.avatar-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+}
+
+/* Message Body */
+.message-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sender-name {
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.message-time {
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.message-text {
+  color: #666;
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Message Actions */
+.message-actions {
+  flex: 0 0 auto;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.message-card:hover .message-actions {
+  opacity: 1;
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-delete:hover {
+  background: rgba(255, 71, 87, 0.1);
+  color: #ff4757;
+}
+
+/* Pagination */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+::ng-deep .pagination {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+::ng-deep .pagination li {
+  list-style: none;
+}
+
+::ng-deep .pagination li a,
+::ng-deep .pagination li span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #666;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+::ng-deep .pagination li a:hover {
+  border-color: #ff6b5b;
+  color: #ff6b5b;
+  background: rgba(255, 107, 91, 0.05);
+}
+
+::ng-deep .pagination li.active a,
+::ng-deep .pagination li.active span {
+  background: linear-gradient(135deg, #ff6b5b 0%, #ff5a7e 100%);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 91, 0.3);
+}
+
+::ng-deep .pagination li i {
+  font-size: 14px;
+}
+
+::ng-deep .pagination li:disabled a,
+::ng-deep .pagination li:disabled span {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .messages-container {
+    padding: 20px 15px;
+  }
+
+  .messages-header {
+    margin-bottom: 30px;
+  }
+
+  .header-title {
+    font-size: 2rem;
+  }
+
+  .filter-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter-tab {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .message-card {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .avatar-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .sender-name {
+    font-size: 14px;
+  }
+
+  .message-time {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .filter-tab {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .filter-tab span {
+    display: none;
+  }
+
+  .message-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sender-name {
+    font-size: 13px;
+  }
+
+  .message-text {
+    font-size: 13px;
+  }
+
+  ::ng-deep .pagination li a,
+  ::ng-deep .pagination li span {
+    min-width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
 }

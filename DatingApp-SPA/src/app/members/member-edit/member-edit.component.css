@@ -1,13 +1,387 @@
-.img-thumbnail{
-    margin: 25px;
-    width: 85%;
-    height: 85%;
+/* Edit Profile Container */
+.edit-profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
 }
-.card-body{
-    padding: 0 25 px;
+
+/* Header */
+.edit-header {
+  margin-bottom: 30px;
+  text-align: center;
 }
-.card-footer{
-    pad: 10px 15px;
-    background-color: #fff;
-    border-top: none;
+
+.edit-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff6b5b 0%, #ff5a7e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.edit-title i {
+  margin-right: 12px;
+  -webkit-text-fill-color: #ff6b5b;
+}
+
+.edit-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Alert Banner */
+.alert-banner {
+  background: linear-gradient(135deg, #ff6b5b 0%, #ff5a7e 100%);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 25px rgba(255, 90, 126, 0.15);
+}
+
+.alert-content {
+  color: white;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.alert-content i {
+  font-size: 1.3rem;
+}
+
+/* Main Content */
+.edit-content {
+  display: grid;
+  gap: 30px;
+}
+
+/* Sidebar - Profile Card */
+.profile-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+.profile-card:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.profile-photo-wrapper {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.profile-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Quick Info */
+.profile-quick-info {
+  margin-bottom: 20px;
+}
+
+.info-item {
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ff6b5b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.info-label i {
+  font-size: 1.1rem;
+}
+
+.info-text {
+  margin: 0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Save Button */
+.btn-save {
+  width: 100%;
+  background: linear-gradient(135deg, #ff6b5b 0%, #ff5a7e 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-save:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 90, 126, 0.3);
+  color: white;
+}
+
+.btn-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-save i {
+  margin-right: 8px;
+}
+
+/* Edit Panel */
+.edit-panel {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+}
+
+/* Form Sections */
+.form-section {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title i {
+  background: linear-gradient(135deg, #ff6b5b 0%, #ff5a7e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.4rem;
+}
+
+.section-desc {
+  color: #999;
+  font-size: 0.95rem;
+  margin: 0 0 16px 0;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+/* Form Controls */
+.edit-textarea,
+.edit-input {
+  width: 100%;
+  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  color: #333;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+}
+
+.edit-textarea::placeholder,
+.edit-input::placeholder {
+  color: #ccc;
+}
+
+.edit-textarea:focus,
+.edit-input:focus {
+  outline: none;
+  border-color: #ff6b5b;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 107, 91, 0.1);
+}
+
+.edit-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Location Inputs Grid */
+.location-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Photo Section */
+.photo-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .edit-profile-container {
+    padding: 20px 15px;
+  }
+
+  .edit-panel {
+    padding: 24px;
+  }
+
+  .location-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .edit-title {
+    font-size: 2rem;
+  }
+
+  .edit-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .edit-panel {
+    padding: 20px;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .profile-photo-wrapper {
+    height: 250px;
+  }
+
+  .info-item {
+    padding: 12px 0;
+  }
+
+  .info-label {
+    font-size: 0.85rem;
+  }
+
+  .info-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-profile-container {
+    padding: 15px 10px;
+  }
+
+  .edit-title {
+    font-size: 1.5rem;
+  }
+
+  .edit-header {
+    margin-bottom: 20px;
+  }
+
+  .alert-banner {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+  }
+
+  .alert-content {
+    font-size: 0.9rem;
+  }
+
+  .edit-panel {
+    padding: 16px;
+  }
+
+  .form-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 1rem;
+    gap: 8px;
+  }
+
+  .section-title i {
+    font-size: 1.1rem;
+  }
+
+  .section-desc {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .form-label {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+
+  .edit-textarea,
+  .edit-input {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .edit-textarea {
+    min-height: 100px;
+  }
+
+  .profile-photo-wrapper {
+    height: 200px;
+    margin-bottom: 16px;
+  }
+
+  .btn-save {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
 }
