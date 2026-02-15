@@ -4,7 +4,9 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { useEffect } from "react";
 import { useAuthStore } from "./store/authStore";
+import axios from "axios";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -17,6 +19,15 @@ import Likes from "./pages/Likes";
 
 function App() {
   const { token } = useAuthStore();
+
+  useEffect(() => {
+    // Set axios default headers whenever token changes
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    } else {
+      delete axios.defaults.headers.common["Authorization"];
+    }
+  }, [token]);
 
   return (
     <Router>

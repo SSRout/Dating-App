@@ -30,7 +30,7 @@ body {
 
 /* Neon button styles */
 .btn-neon {
-  @apply relative px-6 py-2 font-bold rounded-lg overflow-hidden group transition-all duration-300;
+  @apply relative px-6 py-2 font-bold rounded-lg overflow-hidden transition-all duration-300;
 }
 
 .btn-neon-primary {

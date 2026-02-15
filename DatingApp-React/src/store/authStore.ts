@@ -18,7 +18,7 @@ export interface AuthState {
   token: string | null;
   user: User | null;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<void>;
   register: (data: any) => Promise<void>;
   logout: () => void;
   updateUser: (data: Partial<User>) => Promise<void>;
@@ -33,11 +33,11 @@ export const useAuthStore = create<AuthState>((set) => ({
     : null,
   isLoading: false,
 
-  login: async (email: string, password: string) => {
+  login: async (username: string, password: string) => {
     set({ isLoading: true });
     try {
       const response = await axios.post(`${API_URL}/auth/login`, {
-        email,
+        userName: username,
         password,
       });
       const { token, user } = response.data;
