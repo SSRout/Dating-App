@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply transition-colors duration-300;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-dark-bg text-white antialiased;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark-card;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neon-pink rounded-full hover:bg-neon-purple;
+}
+
+/* Neon button styles */
+.btn-neon {
+  @apply relative px-6 py-2 font-bold rounded-lg overflow-hidden transition-all duration-300;
+}
+
+.btn-neon-primary {
+  @apply btn-neon bg-gradient-primary hover:shadow-neon-pink;
+}
+
+.btn-neon-secondary {
+  @apply btn-neon bg-gradient-secondary hover:shadow-neon-cyan;
+}
+
+.btn-neon-purple {
+  @apply btn-neon bg-neon-purple hover:shadow-neon-purple;
+}
+
+/* Glow effects */
+.glow-pink {
+  @apply shadow-neon-pink;
+}
+
+.glow-cyan {
+  @apply shadow-neon-cyan;
+}
+
+.glow-purple {
+  @apply shadow-neon-purple;
+}
+
+/* Card styles */
+.card-elevated {
+  @apply bg-dark-card border border-dark-border rounded-2xl backdrop-blur-md hover:border-neon-pink transition-all duration-300;
+}
+
+.card-glow {
+  @apply card-elevated shadow-neon-pink;
+}
+
+/* Input styles */
+input:focus,
+textarea:focus,
+select:focus {
+  @apply outline-none ring-2 ring-neon-pink ring-offset-2 ring-offset-dark-bg;
+}
+
+/* Animation classes */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideInDown 0.3s ease-out;
+}

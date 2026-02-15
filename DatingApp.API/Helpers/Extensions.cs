@@ -11,9 +11,9 @@ namespace DatingApp.API.Helpers
         
          //Summary: Avoid Wrong exceptions message Related To Cors in Console.
         public static void AddApplicationError(this HttpResponse response,string message){
-                response.Headers.Add("Application-Error",message);
-                response.Headers.Add("Access-Control-Expose-Headers","Application-Error");
-                response.Headers.Add("Access-Control-Allow-Origin","*");
+                response.Headers["Application-Error"] = message;
+                response.Headers["Access-Control-Expose-Headers"] = "Application-Error";
+                response.Headers["Access-Control-Allow-Origin"] = "*";
         }
 
          //Summary: It takes date and return age as number.
@@ -28,8 +28,8 @@ namespace DatingApp.API.Helpers
              var paginationHeader=new PaginationHeader(currentPage,itemsPerPage,totalItems,totalPages);
              var camelCaseFormatter=new JsonSerializerSettings();
              camelCaseFormatter.ContractResolver=new CamelCasePropertyNamesContractResolver();
-             response.Headers.Add("Pagination", Newtonsoft.Json.JsonConvert.SerializeObject(paginationHeader,camelCaseFormatter));
-             response.Headers.Add("Access-Control-Expose-Headers","Pagination");
+             response.Headers["Pagination"] = Newtonsoft.Json.JsonConvert.SerializeObject(paginationHeader,camelCaseFormatter);
+             response.Headers["Access-Control-Expose-Headers"] = "Pagination";
          }
     }
 }
