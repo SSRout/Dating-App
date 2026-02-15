@@ -1,14 +1,8 @@
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { AuthService } from './../_serviceces/auth.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AlertifyService } from '../_serviceces/alertify.service';
-import {Router} from '@angular/router';
-import {
-  FormGroup,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
+import { Router } from '@angular/router';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { User } from '../_models/user';
 
 @Component({
@@ -20,19 +14,15 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   user: User;
   registerForm: FormGroup;
-  bsConfig: Partial<BsDatepickerConfig>;
   constructor(
     private authService: AuthService,
     private alertifyService: AlertifyService,
     private fb: FormBuilder,
-    private router:Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
-    (this.bsConfig = {
-      containerClass: 'theme-red',
-    }),
-      this.craeteRegisterForm();
+    this.craeteRegisterForm();
   }
 
   craeteRegisterForm() {
@@ -54,7 +44,7 @@ export class RegisterComponent implements OnInit {
         ],
         confirmPassword: ['', Validators.required],
       },
-      { validators: this.passwordCompaire }
+      { validators: this.passwordCompaire },
     );
   }
 
@@ -74,11 +64,13 @@ export class RegisterComponent implements OnInit {
         },
         (error) => {
           this.alertifyService.error(error);
-        },()=>{
-          this.authService.login(this.user).subscribe(()=>{
+        },
+        () => {
+          this.authService.login(this.user).subscribe(() => {
             this.router.navigate(['/members']);
           });
-        });
+        },
+      );
     }
   }
 

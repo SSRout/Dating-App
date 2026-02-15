@@ -1,60 +1,125 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="btn-group">
-      <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="Unread" (click)="loadMessages()">
+<div class="messages-container">
+  <!-- Header -->
+  <div class="messages-header">
+    <h2 class="header-title"><i class="fa fa-comments"></i> Messages</h2>
+    <p class="header-subtitle">Stay connected with your matches</p>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="message-filters">
+    <div class="filter-tabs">
+      <button
+        class="filter-tab"
+        [(ngModel)]="messageContainer"
+        btnRadio="Unread"
+        (click)="loadMessages()"
+        [class.active]="messageContainer === 'Unread'"
+      >
         <i class="fa fa-envelope"></i> Unread
       </button>
-      <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="Inbox" (click)="loadMessages()">
-        <i class="fa fa-envelope-open"></i> Inbox
+      <button
+        class="filter-tab"
+        [(ngModel)]="messageContainer"
+        btnRadio="Inbox"
+        (click)="loadMessages()"
+        [class.active]="messageContainer === 'Inbox'"
+      >
+        <i class="fa fa-inbox"></i> Inbox
       </button>
-      <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="Outbox" (click)="loadMessages()">
-        <i class="fa fa-paper-plane"></i> Outbox
+      <button
+        class="filter-tab"
+        [(ngModel)]="messageContainer"
+        btnRadio="Outbox"
+        (click)="loadMessages()"
+        [class.active]="messageContainer === 'Outbox'"
+      >
+        <i class="fa fa-send"></i> Sent
       </button>
     </div>
   </div>
 
-  <div class="row" *ngIf="messages.length == 0">
-    <h3>No messages</h3>
+  <!-- Empty State -->
+  <div *ngIf="messages.length === 0" class="empty-state">
+    <div class="empty-icon">
+      <i class="fa fa-inbox"></i>
+    </div>
+    <h3>No Messages</h3>
+    <p *ngIf="messageContainer === 'Unread'">You have no unread messages</p>
+    <p *ngIf="messageContainer === 'Inbox'">Your inbox is empty</p>
+    <p *ngIf="messageContainer === 'Outbox'">You haven't sent any messages</p>
   </div>
 
-  <div class="row" *ngIf="messages.length > 0">
-    <table class="table table-hover" style="cursor: pointer">
-      <tr>
-        <th style="width: 40%">Message</th>
-        <th style="width: 20%">From / To</th>
-        <th style="width: 20%">Sent / Received</th>
-        <th style="width: 20%"></th>
-      </tr>
-      <tr *ngFor="let message of messages" [routerLink]="['/members', 
-        messageContainer == 'Outbox' ? message.recipientId : message.senderId]" [queryParams]="{tab:3}">
-        <td>{{message.content}}</td>
-        <td>
-          <div *ngIf="messageContainer != 'Outbox'">
-                <img src={{message?.senderPhotoUrl}} class="img-circle rounded-circle mr-2">
-                <strong>{{message.senderKnownAs}}</strong>
-          </div>
-          <div *ngIf="messageContainer == 'Outbox'">
-                <img src={{message?.recipientPhotoUrl}} class="img-circle rounded-circle mr-2">
-                <strong>{{message.recipientKnownAs}}</strong>
-          </div>
-        </td>
-        <td>{{message.messageSent | timeago:'false'}}</td>
-        <td>
-          <button class="btn btn-danger" (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Delete</button>
-        </td>
-      </tr>
-    </table>
+  <!-- Messages List -->
+  <div class="messages-wrapper" *ngIf="messages.length > 0">
+    <div class="messages-list">
+      <div
+        *ngFor="let message of messages"
+        class="message-card"
+        [routerLink]="[
+          '/members',
+          messageContainer == 'Outbox' ? message.recipientId : message.senderId,
+        ]"
+        [queryParams]="{ tab: 3 }"
+      >
+        <div class="message-avatar">
+          <img
+            [src]="
+              messageContainer != 'Outbox'
+                ? message?.senderPhotoUrl
+                : message?.recipientPhotoUrl
+            "
+            [alt]="
+              messageContainer != 'Outbox'
+                ? message.senderKnownAs
+                : message.recipientKnownAs
+            "
+            class="avatar-img"
+          />
+        </div>
 
+        <div class="message-body">
+          <div class="message-header">
+            <h4 class="sender-name">
+              {{
+                messageContainer != "Outbox"
+                  ? message.senderKnownAs
+                  : message.recipientKnownAs
+              }}
+            </h4>
+            <span class="message-time">{{
+              message.messageSent | timeago: "false"
+            }}</span>
+          </div>
+          <p class="message-text">{{ message.content }}</p>
+        </div>
+
+        <div class="message-actions">
+          <button
+            class="btn-delete"
+            (click)="$event.stopPropagation()"
+            (click)="deleteMessage(message.id)"
+            title="Delete message"
+          >
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Pagination -->
+  <div class="pagination-container" *ngIf="pagination.totalItems > 0">
+    <pagination
+      [boundaryLinks]="true"
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+      previousText="‹"
+      nextText="›"
+      firstText="‹‹"
+      lastText="››"
+    >
+    </pagination>
+  </div>
 </div>
-
-<div class="d-flex justify-content-center" *ngIf="pagination.totalItems>0">
-    <pagination [boundaryLinks]="true" 
-                [totalItems]="pagination.totalItems"
-                [itemsPerPage]="pagination.itemsPerPage"
-                [(ngModel)]="pagination.currentPage"
-                (pageChanged)="pageChanged($event)"
-              previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-  </pagination>
-  </div>
